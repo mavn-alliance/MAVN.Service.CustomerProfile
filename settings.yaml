@@ -1,0 +1,30 @@
+CustomerProfileService:
+    Db:
+        DataConnectionString:
+            settings-key: CustomerProfileService-DataConnectionString
+        LogsConnString:
+            settings-key: CustomerProfileService-LogsConnString
+            types:
+              - AzureTableStorage
+    RabbitMq:
+        RabbitMqConnectionString:
+            settings-key: UserManagementRabbitMQ
+            types:
+              - RabbitMq
+
+DictionariesServiceClient:
+  ServiceUrl:
+    settings-key: DictionariesServiceUrl
+    
+SlackNotifications:
+    AzureQueue:
+        ConnectionString:
+            settings-key: SlackNotificationsConnString
+            types:
+                - AzureTableStorage
+        QueueName:
+            settings-key: SlackQueueName
+MonitoringServiceClient:
+    MonitoringServiceUrl:
+        settings-key: MonitoringServiceUrl
+
