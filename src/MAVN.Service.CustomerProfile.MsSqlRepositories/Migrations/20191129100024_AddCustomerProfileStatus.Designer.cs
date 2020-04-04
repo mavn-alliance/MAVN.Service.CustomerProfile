@@ -22,7 +22,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.AdminProfileArchiveEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.AdminProfileArchiveEntity", b =>
                 {
                     b.Property<Guid>("AdminId")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("admin_profiles_archive");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.AdminProfileEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.AdminProfileEntity", b =>
                 {
                     b.Property<Guid>("AdminId")
                         .ValueGeneratedOnAdd()
@@ -102,7 +102,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("admin_profiles");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileArchiveEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileArchiveEntity", b =>
                 {
                     b.Property<string>("CustomerId")
                         .ValueGeneratedOnAdd()
@@ -155,7 +155,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("customer_profile_archive");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileEntity", b =>
                 {
                     b.Property<string>("CustomerId")
                         .ValueGeneratedOnAdd()
@@ -221,7 +221,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("customer_profile");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.LoginProviderEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.LoginProviderEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -242,7 +242,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("login_providers");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.PartnerContactArchiveEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.PartnerContactArchiveEntity", b =>
                 {
                     b.Property<string>("LocationId")
                         .ValueGeneratedOnAdd()
@@ -266,7 +266,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("partner_contact_archive");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.PartnerContactEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.PartnerContactEntity", b =>
                 {
                     b.Property<string>("LocationId")
                         .ValueGeneratedOnAdd()
@@ -294,7 +294,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("partner_contact");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.ReferralHotelProfileArchiveEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.ReferralHotelProfileArchiveEntity", b =>
                 {
                     b.Property<Guid>("ReferralHotelId")
                         .ValueGeneratedOnAdd()
@@ -309,7 +309,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("referral_hotel_profiles_archive");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.ReferralHotelProfileEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.ReferralHotelProfileEntity", b =>
                 {
                     b.Property<Guid>("ReferralHotelId")
                         .ValueGeneratedOnAdd()
@@ -334,7 +334,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("referral_hotel_profiles");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.ReferralLeadProfileArchiveEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.ReferralLeadProfileArchiveEntity", b =>
                 {
                     b.Property<Guid>("ReferralLeadId")
                         .ValueGeneratedOnAdd()
@@ -364,7 +364,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("referral_lead_profiles_archive");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.ReferralLeadProfileEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.ReferralLeadProfileEntity", b =>
                 {
                     b.Property<Guid>("ReferralLeadId")
                         .ValueGeneratedOnAdd()
@@ -398,9 +398,9 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("referral_lead_profiles");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.LoginProviderEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.LoginProviderEntity", b =>
                 {
-                    b.HasOne("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileEntity", "CustomerProfile")
+                    b.HasOne("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileEntity", "CustomerProfile")
                         .WithMany("LoginProviders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);

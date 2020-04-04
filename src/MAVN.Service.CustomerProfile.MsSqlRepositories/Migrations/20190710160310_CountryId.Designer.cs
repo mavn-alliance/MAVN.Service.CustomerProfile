@@ -22,7 +22,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileArchiveEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileArchiveEntity", b =>
                 {
                     b.Property<string>("CustomerId")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.ToTable("customer_profile_archive");
                 });
 
-            modelBuilder.Entity("Lykke.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileEntity", b =>
+            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.CustomerProfileEntity", b =>
                 {
                     b.Property<string>("CustomerId")
                         .ValueGeneratedOnAdd()
