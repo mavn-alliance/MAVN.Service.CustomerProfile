@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,7 +18,7 @@ using MAVN.Service.CustomerProfile.Domain.Exceptions;
 using MAVN.Service.CustomerProfile.Domain.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using CustomerProfileModel = Lykke.Service.CustomerProfile.Domain.Models.CustomerProfileModel;
+using CustomerProfileModel = MAVN.Service.CustomerProfile.Domain.Models.CustomerProfileModel;
 
 namespace MAVN.Service.CustomerProfile.Controllers
 {
