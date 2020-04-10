@@ -1,4 +1,4 @@
-using Autofac;
+﻿using Autofac;
 using JetBrains.Annotations;
 using Lykke.Common.MsSql;
 using MAVN.Service.CustomerProfile.Domain.Repositories;
@@ -12,10 +12,12 @@ namespace MAVN.Service.CustomerProfile.Modules
     [UsedImplicitly]
     public class DataLayerModule : Module
     {
+        private readonly bool _isPhoneVerificationDisabled;
         private readonly string _connectionString;
 
         public DataLayerModule(IReloadingManager<AppSettings> appSettings)
         {
+            _isPhoneVerificationDisabled = appSettings.CurrentValue.CustomerProfileService.IsPhoneVerificationDisabled;
             _connectionString = appSettings.CurrentValue.CustomerProfileService.Db.DataConnectionString;
         }
 
@@ -23,8 +25,8 @@ namespace MAVN.Service.CustomerProfile.Modules
         {
             builder.RegisterMsSql(
                 _connectionString,
-                connString => new CustomerProfileContext(connString, false),
-                dbConn => new CustomerProfileContext(dbConn));
+                connString => new CustomerProfileContext(connString, false, isPhoneVerificationDisabled: _isPhoneVerificationDisabled),
+                dbConn => new CustomerProfileContext(dbConn, isPhoneVerificationDisabled: _isPhoneVerificationDisabled));
 
             builder.RegisterType<AdminProfileRepository>()
                 .As<IAdminProfileRepository>()
