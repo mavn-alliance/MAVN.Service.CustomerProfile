@@ -16,7 +16,6 @@ namespace MAVN.Service.CustomerProfile.Modules
         private const string CustomerPhoneVerifiedExchangeName = "lykke.customer.phoneverified";
         private const string CustomerProfileDeactivationRequestedExchangeName = "lykke.customer.profiledeactivationrequested";
 
-
         private readonly string _connString;
 
         public RabbitMqModule(IReloadingManager<AppSettings> appSettings)
