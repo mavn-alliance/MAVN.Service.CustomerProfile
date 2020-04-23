@@ -4,14 +4,16 @@ using MAVN.Service.CustomerProfile.MsSqlRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
 {
     [DbContext(typeof(CustomerProfileContext))]
-    partial class CustomerProfileContextModelSnapshot : ModelSnapshot
+    [Migration("20200423152012_AddIsAdminEmailVerified")]
+    partial class AddIsAdminEmailVerified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
