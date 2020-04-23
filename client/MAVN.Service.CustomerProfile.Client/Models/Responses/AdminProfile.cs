@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using JetBrains.Annotations;
 
 namespace MAVN.Service.CustomerProfile.Client.Models.Responses
@@ -28,6 +28,11 @@ namespace MAVN.Service.CustomerProfile.Client.Models.Responses
         /// The email address.
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// Email Verified flag.
+        /// </summary>
+        public bool IsEmailVerified { get; set; }
 
         /// <summary>
         /// Phone number.

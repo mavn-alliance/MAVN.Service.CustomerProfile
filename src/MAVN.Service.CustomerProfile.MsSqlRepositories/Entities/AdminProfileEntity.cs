@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Falcon.Common.Encryption;
@@ -37,6 +37,12 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
         [EncryptedProperty]
         public string Email { get; set; }
 
+        [Column("email_verified")]
+        public bool IsEmailVerified { get; set; }
+
+        [Column("was_email_ever_verified")]
+        public bool WasEmailEverVerified { get; set; }
+
         [Required]
         [Column("phone_number")]
         [EncryptedProperty]
@@ -62,7 +68,6 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
             AdminId = adminProfile.AdminId;
             FirstName = adminProfile.FirstName;
             LastName = adminProfile.LastName;
-            Email = adminProfile.Email;
             PhoneNumber = adminProfile.PhoneNumber;
             Company = adminProfile.Company;
             Department = adminProfile.Department;

@@ -1,4 +1,4 @@
-using Autofac;
+﻿using Autofac;
 using JetBrains.Annotations;
 using Lykke.Common;
 using Lykke.RabbitMqBroker.Publisher;
@@ -16,6 +16,7 @@ namespace MAVN.Service.CustomerProfile.Modules
         private const string CustomerPhoneVerifiedExchangeName = "lykke.customer.phoneverified";
         private const string CustomerProfileDeactivationRequestedExchangeName = "lykke.customer.profiledeactivationrequested";
 
+
         private readonly string _connString;
 
         public RabbitMqModule(IReloadingManager<AppSettings> appSettings)
@@ -25,6 +26,8 @@ namespace MAVN.Service.CustomerProfile.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
+            #region Customer
+
             builder.RegisterType<CodeVerifiedSubscriber>()
                 .As<IStartStop>()
                 .SingleInstance()
@@ -51,6 +54,17 @@ namespace MAVN.Service.CustomerProfile.Modules
             builder.RegisterJsonRabbitPublisher<CustomerProfileDeactivationRequestedEvent>(
                 _connString,
                 CustomerProfileDeactivationRequestedExchangeName);
+
+            #endregion
+
+            #region Admin
+
+            builder.RegisterType<AdminEmailVerifiedSubscriber>()
+                .As<IStartStop>()
+                .SingleInstance()
+                .WithParameter(TypedParameter.From(_connString));
+
+            #endregion
         }
     }
 }

@@ -39,6 +39,10 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
         internal DbSet<ReferralFriendProfileArchiveEntity> ReferralFriendProfilesArchive { get; set; }
 
         [UsedImplicitly]
+        public CustomerProfileContext() : base(Schema)
+        {
+        }
+
         public CustomerProfileContext(bool isPhoneVerificationDisabled = false)
             : base(Schema)
         {

@@ -17,5 +17,6 @@
     <PackageReference Include="Lykke.Common.MsSql" Version="2.3.0" />
     <PackageReference Include="Lykke.RabbitMqBroker" Version="7.13.1" />
     <PackageReference Include="Lykke.Sdk" Version="5.17.0" />
+    <PackageReference Include="MAVN.Service.AdminManagement.Contract" Version="1.1.1" />
   </ItemGroup>
 </Project>

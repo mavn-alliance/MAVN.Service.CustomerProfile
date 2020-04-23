@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -124,6 +124,31 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
 
                     transaction.Commit();
                 }
+            }
+        }
+
+        public async Task<(AdminProfileErrorCodes error, bool wasVerfiedBefore)> SetEmailVerifiedAsync(Guid adminId)
+        {
+            using (var context = _contextFactory.CreateDataContext())
+            {
+                var entity = await context.AdminProfiles
+                    .IgnoreQueryFilters()
+                    .FirstOrDefaultAsync(c => c.AdminId == adminId);
+
+                if (entity == null)
+                    return (AdminProfileErrorCodes.AdminProfileDoesNotExist, false);
+
+                var wasEmailPreviouslyVerified = entity.WasEmailEverVerified;
+
+                if (entity.IsEmailVerified)
+                    return (AdminProfileErrorCodes.AdminProfileEmailAlreadyVerified, wasEmailPreviouslyVerified);
+
+                entity.IsEmailVerified = true;
+                entity.WasEmailEverVerified = true;
+
+                await context.SaveChangesAsync();
+
+                return (AdminProfileErrorCodes.None, wasEmailPreviouslyVerified);
             }
         }
 
