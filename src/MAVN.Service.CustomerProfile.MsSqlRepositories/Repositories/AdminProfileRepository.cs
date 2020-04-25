@@ -70,7 +70,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
                 if (entity != null)
                     return AdminProfileErrorCodes.AdminProfileAlreadyExists;
 
-                entity = new AdminProfileEntity(adminProfile);
+                entity = AdminProfileEntity.Create(adminProfile);
 
                 entity = _encryptionService.Encrypt(entity);
 
