@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Falcon.Common.Encryption;
 using Lykke.Common.MsSql;
 using MAVN.Service.CustomerProfile.Domain.Enums;
@@ -15,13 +16,16 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
     public class AdminProfileRepository : IAdminProfileRepository
     {
         private readonly MsSqlContextFactory<CustomerProfileContext> _contextFactory;
+        private readonly IMapper _mapper;
         private readonly IEncryptionService _encryptionService;
 
         public AdminProfileRepository(
             MsSqlContextFactory<CustomerProfileContext> contextFactory,
+            IMapper mapper,
             IEncryptionService encryptionService)
         {
             _contextFactory = contextFactory;
+            _mapper = mapper;
             _encryptionService = encryptionService;
         }
 
@@ -32,7 +36,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
                 var entities = await context.AdminProfiles.ToListAsync();
 
                 return entities
-                    .Select(entity => ToDomain(_encryptionService.Decrypt(entity)))
+                    .Select(entity => _mapper.Map<AdminProfile>(_encryptionService.Decrypt(entity)))
                     .ToList();
             }
         }
@@ -46,7 +50,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
                     .ToListAsync();
 
                 return entities
-                    .Select(entity => ToDomain(_encryptionService.Decrypt(entity)))
+                    .Select(entity => _mapper.Map<AdminProfile>(_encryptionService.Decrypt(entity)))
                     .ToList();
             }
         }
@@ -57,7 +61,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
             {
                 var entity = await context.AdminProfiles.FindAsync(adminId);
 
-                return entity != null ? ToDomain(_encryptionService.Decrypt(entity)) : null;
+                return entity != null ? _mapper.Map<AdminProfile>(_encryptionService.Decrypt(entity)) : null;
             }
         }
 
@@ -70,7 +74,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
                 if (entity != null)
                     return AdminProfileErrorCodes.AdminProfileAlreadyExists;
 
-                entity = AdminProfileEntity.Create(adminProfile);
+                entity = _mapper.Map<AdminProfileEntity>(adminProfile);
 
                 entity = _encryptionService.Encrypt(entity);
 
@@ -151,18 +155,5 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
                 return (AdminProfileErrorCodes.None, wasEmailPreviouslyVerified);
             }
         }
-
-        private static AdminProfile ToDomain(AdminProfileEntity entity)
-            => new AdminProfile
-            {
-                AdminId = entity.AdminId,
-                FirstName = entity.FirstName,
-                LastName = entity.LastName,
-                Email = entity.Email,
-                PhoneNumber = entity.PhoneNumber,
-                Company = entity.Company,
-                Department = entity.Department,
-                JobTitle = entity.JobTitle,
-            };
     }
 }

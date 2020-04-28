@@ -58,22 +58,6 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
         [EncryptedProperty]
         public string JobTitle { get; set; }
 
-        internal static AdminProfileEntity Create(AdminProfile adminProfile)
-        {
-            return new AdminProfileEntity
-            {
-                AdminId = adminProfile.AdminId,
-                FirstName = adminProfile.FirstName,
-                LastName = adminProfile.LastName,
-                Email = adminProfile.Email,
-                IsEmailVerified = adminProfile.IsEmailVerified,
-                PhoneNumber = adminProfile.PhoneNumber,
-                Company = adminProfile.Company,
-                Department = adminProfile.Department,
-                JobTitle = adminProfile.JobTitle
-            };
-        }
-
         internal void Update(AdminProfile adminProfile)
         {
             AdminId = adminProfile.AdminId;
