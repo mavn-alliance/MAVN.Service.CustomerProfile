@@ -51,6 +51,10 @@ namespace MAVN.Service.CustomerProfile.Modules
             builder.RegisterType<ReferralFriendProfileRepository>()
                 .As<IReferralFriendProfileRepository>()
                 .SingleInstance();
+
+            builder.RegisterType<PaymentProviderDetailsRepository>()
+                .As<IPaymentProviderDetailsRepository>()
+                .SingleInstance();
         }
     }
 }

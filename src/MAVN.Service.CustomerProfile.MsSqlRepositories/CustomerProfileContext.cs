@@ -36,6 +36,8 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
 
         internal DbSet<ReferralFriendProfileEntity> ReferralFriendProfiles { get; set; }
 
+        internal DbSet<PaymentProviderDetailsEntity> PaymentProviderDetails { get; set; }
+
         internal DbSet<ReferralFriendProfileArchiveEntity> ReferralFriendProfilesArchive { get; set; }
 
         [UsedImplicitly]
@@ -114,6 +116,13 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
 
             modelBuilder.Entity<ReferralLeadProfileEntity>()
                 .HasIndex(c => c.PhoneNumber);
+
+            // configuring payment_provider_details table
+            modelBuilder.Entity<PaymentProviderDetailsEntity>()
+                .HasIndex(c => c.PartnerId).IsUnique(false);
+
+            modelBuilder.Entity<PaymentProviderDetailsEntity>()
+                .HasIndex(c => new { c.PartnerId, c.PaymentIntegrationProvider }).IsUnique();
         }
     }
 }
