@@ -59,6 +59,11 @@ namespace MAVN.Service.CustomerProfile.MappingProfiles
             CreateMap<PaginatedPartnerContactsModel, PaginatedPartnerContactsResponse>();
 
             CreateMap<PartnerContactRequestModel, PartnerContactModel>();
+
+            CreateMap<CreatePaymentProviderDetailsRequest, IPaymentProviderDetails>()
+                .ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<EditPaymentProviderDetailsRequest, IPaymentProviderDetails>();
+            CreateMap<IPaymentProviderDetails, PaymentProviderDetails>();
         }
     }
 }

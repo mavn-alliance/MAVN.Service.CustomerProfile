@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using MAVN.Service.CustomerProfile.Client.Api;
 
 namespace MAVN.Service.CustomerProfile.Client
@@ -48,5 +48,10 @@ namespace MAVN.Service.CustomerProfile.Client
         /// CustomerPhones API.
         /// </summary>
         ICustomerPhonesApi CustomerPhones { get; }
+
+        /// <summary>
+        /// PaymentProviderDetails API.
+        /// </summary>
+        IPaymentProviderDetailsApi PaymentProviderDetails { get; }
     }
 }

@@ -1,4 +1,4 @@
-using Lykke.HttpClientGenerator;
+﻿using Lykke.HttpClientGenerator;
 using MAVN.Service.CustomerProfile.Client.Api;
 
 namespace MAVN.Service.CustomerProfile.Client
@@ -19,6 +19,7 @@ namespace MAVN.Service.CustomerProfile.Client
             ReferralFriendProfiles = httpClientGenerator.Generate<IReferralFriendProfilesApi>();
             Statistics = httpClientGenerator.Generate<IStatisticsApi>();
             CustomerPhones = httpClientGenerator.Generate<ICustomerPhonesApi>();
+            PaymentProviderDetails = httpClientGenerator.Generate<IPaymentProviderDetailsApi>();
         }
 
         /// <inheritdoc/>
@@ -44,5 +45,8 @@ namespace MAVN.Service.CustomerProfile.Client
 
         /// <inheritdoc/>
         public ICustomerPhonesApi CustomerPhones { get; }
+
+        /// <inheritdoc/>
+        public IPaymentProviderDetailsApi PaymentProviderDetails { get; }
     }
 }
