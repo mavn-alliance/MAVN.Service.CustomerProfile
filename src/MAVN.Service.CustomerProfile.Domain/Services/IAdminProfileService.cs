@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MAVN.Service.CustomerProfile.Domain.Enums;
@@ -19,5 +19,7 @@ namespace MAVN.Service.CustomerProfile.Domain.Services
         Task<AdminProfileErrorCodes> UpdateAsync(AdminProfile adminProfile);
 
         Task DeleteAsync(Guid adminId);
+
+        Task<AdminProfileErrorCodes> SetEmailAsVerifiedAsync(string adminId);
     }
 }

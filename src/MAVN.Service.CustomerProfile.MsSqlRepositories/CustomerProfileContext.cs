@@ -1,4 +1,4 @@
-using System.Data.Common;
+﻿using System.Data.Common;
 using JetBrains.Annotations;
 using Lykke.Common.MsSql;
 using MAVN.Service.CustomerProfile.Domain.Enums;
@@ -12,8 +12,10 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
     {
         private const string Schema = "customer_profile";
 
+        private readonly bool _isPhoneVerificationDisabled;
+
         internal DbSet<AdminProfileEntity> AdminProfiles { get; set; }
-        
+
         internal DbSet<AdminProfileArchiveEntity> AdminProfilesArchive { get; set; }
 
         internal DbSet<CustomerProfileEntity> CustomerProfiles { get; set; }
@@ -34,27 +36,37 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
 
         internal DbSet<ReferralFriendProfileEntity> ReferralFriendProfiles { get; set; }
 
+        internal DbSet<PaymentProviderDetailsEntity> PaymentProviderDetails { get; set; }
+
         internal DbSet<ReferralFriendProfileArchiveEntity> ReferralFriendProfilesArchive { get; set; }
 
         [UsedImplicitly]
-        public CustomerProfileContext()
+        public CustomerProfileContext() : base(Schema)
+        {
+        }
+
+        public CustomerProfileContext(bool isPhoneVerificationDisabled = false)
             : base(Schema)
         {
+            _isPhoneVerificationDisabled = isPhoneVerificationDisabled;
         }
 
-        public CustomerProfileContext(string connectionString, bool isTraceEnabled)
+        public CustomerProfileContext(string connectionString, bool isTraceEnabled, bool isPhoneVerificationDisabled = false)
             : base(Schema, connectionString, isTraceEnabled)
         {
+            _isPhoneVerificationDisabled = isPhoneVerificationDisabled;
         }
 
-        public CustomerProfileContext(DbConnection dbConnection)
+        public CustomerProfileContext(DbConnection dbConnection, bool isPhoneVerificationDisabled = false)
             : base(Schema, dbConnection)
         {
+            _isPhoneVerificationDisabled = isPhoneVerificationDisabled;
         }
 
-        public CustomerProfileContext(DbContextOptions contextOptions) 
+        public CustomerProfileContext(DbContextOptions contextOptions, bool isPhoneVerificationDisabled = false)
             : base(Schema, contextOptions)
         {
+            _isPhoneVerificationDisabled = isPhoneVerificationDisabled;
         }
 
         protected override void OnLykkeModelCreating(ModelBuilder modelBuilder)
@@ -71,7 +83,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
             builder.HasIndex(c => c.Status).IsUnique(false);
 
             modelBuilder.Entity<CustomerProfileEntity>()
-                .HasQueryFilter(c => c.IsEmailVerified && c.IsPhoneVerified);
+                .HasQueryFilter(c => c.IsEmailVerified && (_isPhoneVerificationDisabled || c.IsPhoneVerified));
 
             // configuring customer_profile_archive table
             modelBuilder.Entity<CustomerProfileArchiveEntity>()
@@ -104,6 +116,13 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
 
             modelBuilder.Entity<ReferralLeadProfileEntity>()
                 .HasIndex(c => c.PhoneNumber);
+
+            // configuring payment_provider_details table
+            modelBuilder.Entity<PaymentProviderDetailsEntity>()
+                .HasIndex(c => c.PartnerId).IsUnique(false);
+
+            modelBuilder.Entity<PaymentProviderDetailsEntity>()
+                .HasIndex(c => new { c.PartnerId, c.PaymentIntegrationProvider }).IsUnique();
         }
     }
 }

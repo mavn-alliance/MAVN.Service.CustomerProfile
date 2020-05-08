@@ -1,4 +1,4 @@
-using Autofac;
+﻿using Autofac;
 using JetBrains.Annotations;
 using Lykke.Common;
 using Lykke.RabbitMqBroker.Publisher;
@@ -25,6 +25,8 @@ namespace MAVN.Service.CustomerProfile.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
+            #region Customer
+
             builder.RegisterType<CodeVerifiedSubscriber>()
                 .As<IStartStop>()
                 .SingleInstance()
@@ -51,6 +53,17 @@ namespace MAVN.Service.CustomerProfile.Modules
             builder.RegisterJsonRabbitPublisher<CustomerProfileDeactivationRequestedEvent>(
                 _connString,
                 CustomerProfileDeactivationRequestedExchangeName);
+
+            #endregion
+
+            #region Admin
+
+            builder.RegisterType<AdminEmailVerifiedSubscriber>()
+                .As<IStartStop>()
+                .SingleInstance()
+                .WithParameter(TypedParameter.From(_connString));
+
+            #endregion
         }
     }
 }

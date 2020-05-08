@@ -4,14 +4,16 @@ using MAVN.Service.CustomerProfile.MsSqlRepositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
 {
     [DbContext(typeof(CustomerProfileContext))]
-    partial class CustomerProfileContextModelSnapshot : ModelSnapshot
+    [Migration("20200423152012_AddIsAdminEmailVerified")]
+    partial class AddIsAdminEmailVerified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -305,33 +307,6 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Migrations
                     b.HasIndex("PhoneNumber");
 
                     b.ToTable("partner_contact");
-                });
-
-            modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.PaymentProviderDetailsEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("id");
-
-                    b.Property<Guid>("PartnerId")
-                        .HasColumnName("partner_id");
-
-                    b.Property<string>("PaymentIntegrationProperties")
-                        .IsRequired()
-                        .HasColumnName("payment_integration_properties");
-
-                    b.Property<string>("PaymentIntegrationProvider")
-                        .IsRequired()
-                        .HasColumnName("payment_integration_provider");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PartnerId");
-
-                    b.HasIndex("PartnerId", "PaymentIntegrationProvider")
-                        .IsUnique();
-
-                    b.ToTable("payment_provider_details");
                 });
 
             modelBuilder.Entity("MAVN.Service.CustomerProfile.MsSqlRepositories.Entities.ReferralFriendProfileArchiveEntity", b =>

@@ -11,6 +11,8 @@ CustomerProfileService:
             settings-key: UserManagementRabbitMQ
             types:
               - RabbitMq
+    IsPhoneVerificationDisabled:
+        settings-key: IsPhoneVerificationDisabled
 
 DictionariesServiceClient:
   ServiceUrl:

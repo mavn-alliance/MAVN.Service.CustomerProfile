@@ -1,4 +1,5 @@
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
+using Lykke.SettingsReader.Attributes;
 
 namespace MAVN.Service.CustomerProfile.Settings
 {
@@ -8,5 +9,8 @@ namespace MAVN.Service.CustomerProfile.Settings
         public DbSettings Db { get; set; }
 
         public RabbitMqSettings RabbitMq { get; set; }
+
+        [Optional]
+        public bool IsPhoneVerificationDisabled { get; set; }
     }
 }

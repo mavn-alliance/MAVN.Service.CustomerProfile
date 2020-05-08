@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Autofac;
 using MAVN.Common.Encryption;
 using JetBrains.Annotations;
@@ -59,6 +59,10 @@ namespace MAVN.Service.CustomerProfile.Modules
 
             builder.RegisterType<StatisticsService>()
                 .As<IStatisticsService>()
+                .SingleInstance();
+
+            builder.RegisterType<PaymentProviderDetailsService>()
+                .As<IPaymentProviderDetailsService>()
                 .SingleInstance();
 
             var apiKeysPairs = Environment.GetEnvironmentVariable("CPApiKeysPairs");

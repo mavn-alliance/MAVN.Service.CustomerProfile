@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Log;
@@ -77,6 +77,26 @@ namespace MAVN.Service.CustomerProfile.DomainServices
             await _adminProfileRepository.DeleteAsync(adminId);
 
             _log.Info("Admin profile deleted", context: $"adminId: {adminId}");
+        }
+
+        public async Task<AdminProfileErrorCodes> SetEmailAsVerifiedAsync(string adminId)
+        {
+            var (error, wasEmailEverVerified) = await _adminProfileRepository.SetEmailVerifiedAsync(Guid.Parse(adminId));
+
+            switch (error)
+            {
+                case AdminProfileErrorCodes.AdminProfileDoesNotExist:
+                    _log.Warning("Admin Profile does not exists", context: adminId);
+                    break;
+                case AdminProfileErrorCodes.AdminProfileEmailAlreadyVerified:
+                    _log.Warning("Admin profile email is already verified", context: adminId);
+                    break;
+                default:
+                    _log.Info("Admin profile email is successfully verified", context: adminId);
+                    break;
+            }
+
+            return error;
         }
     }
 }

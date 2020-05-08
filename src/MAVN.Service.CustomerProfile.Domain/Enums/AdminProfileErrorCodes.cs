@@ -1,4 +1,4 @@
-namespace MAVN.Service.CustomerProfile.Domain.Enums
+﻿namespace MAVN.Service.CustomerProfile.Domain.Enums
 {
     /// <summary>
     /// Represents error codes of operations with admin profile.
@@ -18,6 +18,11 @@ namespace MAVN.Service.CustomerProfile.Domain.Enums
         /// <summary>
         /// The admin profile already exists.
         /// </summary>
-        AdminProfileAlreadyExists
+        AdminProfileAlreadyExists,
+
+        /// <summary>
+        /// The admin profile has been already verified.
+        /// </summary>
+        AdminProfileEmailAlreadyVerified
     }
 }

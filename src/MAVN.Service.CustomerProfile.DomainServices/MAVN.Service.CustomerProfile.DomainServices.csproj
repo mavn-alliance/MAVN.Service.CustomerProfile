@@ -17,5 +17,6 @@
     <PackageReference Include="MAVN.Service.Dictionaries.Client" Version="1.0.1" />
     <PackageReference Include="MAVN.Service.PrivateBlockchainFacade.Contract" Version="1.1.0" />
     <PackageReference Include="MAVN.Service.Tiers.Contract" Version="1.0.1" />
+    <PackageReference Include="MAVN.Service.AdminManagement.Contract" Version="1.1.1" />
   </ItemGroup>
 </Project>

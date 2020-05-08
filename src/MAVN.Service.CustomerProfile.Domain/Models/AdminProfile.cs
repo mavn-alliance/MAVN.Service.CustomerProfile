@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace MAVN.Service.CustomerProfile.Domain.Models
 {
@@ -26,6 +26,11 @@ namespace MAVN.Service.CustomerProfile.Domain.Models
         /// The email address.
         /// </summary>
         public string Email { get; set; }
+
+        /// <summary>
+        /// Email Verified flag.
+        /// </summary>
+        public bool IsEmailVerified { get; set; }
 
         /// <summary>
         /// Phone number.

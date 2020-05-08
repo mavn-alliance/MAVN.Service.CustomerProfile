@@ -12,11 +12,6 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
         public AdminProfileEntity()
         {
         }
-
-        public AdminProfileEntity(AdminProfile adminProfile)
-        {
-            Update(adminProfile);
-        }
         
         [Key]
         [Column("admin_id")]
@@ -36,6 +31,12 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
         [Column("email")]
         [EncryptedProperty]
         public string Email { get; set; }
+
+        [Column("email_verified")]
+        public bool IsEmailVerified { get; set; }
+
+        [Column("was_email_ever_verified")]
+        public bool WasEmailEverVerified { get; set; }
 
         [Required]
         [Column("phone_number")]
@@ -62,7 +63,6 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
             AdminId = adminProfile.AdminId;
             FirstName = adminProfile.FirstName;
             LastName = adminProfile.LastName;
-            Email = adminProfile.Email;
             PhoneNumber = adminProfile.PhoneNumber;
             Company = adminProfile.Company;
             Department = adminProfile.Department;
