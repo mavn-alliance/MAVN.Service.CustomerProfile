@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 using Common.Log;
-using Falcon.Common.Encryption;
+using MAVN.Common.Encryption;
 using Lykke.Common.ApiLibrary.Exceptions;
 using Lykke.Common.Extensions;
 using Lykke.Common.Log;
