@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Common.Log;
-using Falcon.Common.Encryption;
+using MAVN.Common.Encryption;
 using Lykke.Common.Log;
 using Lykke.Common.MsSql;
 using MAVN.Service.CustomerProfile.Domain.Enums;

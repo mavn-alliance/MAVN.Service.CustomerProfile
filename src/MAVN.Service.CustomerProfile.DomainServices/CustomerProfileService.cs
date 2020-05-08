@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common;
 using Common.Log;
-using Falcon.Common;
+using MAVN.Common;
 using Lykke.Common.Log;
 using Lykke.Common.MsSql;
 using Lykke.RabbitMqBroker.Publisher;
@@ -13,7 +13,7 @@ using MAVN.Service.CustomerProfile.Domain.Enums;
 using MAVN.Service.CustomerProfile.Domain.Models;
 using MAVN.Service.CustomerProfile.Domain.Repositories;
 using MAVN.Service.CustomerProfile.Domain.Services;
-using Lykke.Service.Dictionaries.Client;
+using MAVN.Service.Dictionaries.Client;
 
 namespace MAVN.Service.CustomerProfile.DomainServices
 {

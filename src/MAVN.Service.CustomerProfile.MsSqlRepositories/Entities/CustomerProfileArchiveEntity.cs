@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Falcon.Common.Encryption;
+using MAVN.Common.Encryption;
 
 namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
 {

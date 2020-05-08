@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Common;
-using Falcon.Common.Encryption;
+using MAVN.Common.Encryption;
 using JetBrains.Annotations;
 using Lykke.Common.Api.Contract.Responses;
 using Microsoft.AspNetCore.Builder;

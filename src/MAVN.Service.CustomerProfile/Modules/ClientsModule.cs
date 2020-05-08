@@ -1,7 +1,7 @@
-using Autofac;
+﻿using Autofac;
 using JetBrains.Annotations;
 using MAVN.Service.CustomerProfile.Settings;
-using Lykke.Service.Dictionaries.Client;
+using MAVN.Service.Dictionaries.Client;
 using Lykke.SettingsReader;
 
 namespace MAVN.Service.CustomerProfile.Modules
