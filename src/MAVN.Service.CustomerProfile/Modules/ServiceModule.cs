@@ -1,6 +1,6 @@
 using System;
 using Autofac;
-using Falcon.Common.Encryption;
+using MAVN.Common.Encryption;
 using JetBrains.Annotations;
 using Lykke.Sdk;
 using MAVN.Service.CustomerProfile.Domain.Services;

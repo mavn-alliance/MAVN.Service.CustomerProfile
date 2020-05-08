@@ -1,10 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Lykke.Common.MsSql;
 using Lykke.Logs;
-using Lykke.Logs.Loggers.LykkeConsole;
 using Lykke.RabbitMqBroker.Publisher;
 using MAVN.Service.CustomerProfile.Contract;
 using MAVN.Service.CustomerProfile.Domain.Enums;
@@ -12,8 +11,8 @@ using MAVN.Service.CustomerProfile.Domain.Models;
 using MAVN.Service.CustomerProfile.Domain.Repositories;
 using MAVN.Service.CustomerProfile.DomainServices;
 using MAVN.Service.CustomerProfile.MsSqlRepositories;
-using Lykke.Service.Dictionaries.Client;
-using Lykke.Service.Dictionaries.Client.Models.Salesforce;
+using MAVN.Service.Dictionaries.Client;
+using MAVN.Service.Dictionaries.Client.Models.Salesforce;
 using Moq;
 using Xunit;
 
