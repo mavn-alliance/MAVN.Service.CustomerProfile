@@ -1,6 +1,6 @@
-﻿using System.Data.Common;
+using System.Data.Common;
 using JetBrains.Annotations;
-using Lykke.Common.MsSql;
+using MAVN.Common.MsSql;
 using MAVN.Service.CustomerProfile.Domain.Enums;
 using MAVN.Service.CustomerProfile.MsSqlRepositories.Entities;
 using Microsoft.EntityFrameworkCore;
