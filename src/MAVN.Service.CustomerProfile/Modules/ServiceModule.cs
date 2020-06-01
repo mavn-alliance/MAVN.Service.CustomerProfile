@@ -1,6 +1,6 @@
-using System;
+﻿using System;
 using Autofac;
-using Falcon.Common.Encryption;
+using MAVN.Common.Encryption;
 using JetBrains.Annotations;
 using Lykke.Sdk;
 using MAVN.Service.CustomerProfile.Domain.Services;
@@ -59,6 +59,10 @@ namespace MAVN.Service.CustomerProfile.Modules
 
             builder.RegisterType<StatisticsService>()
                 .As<IStatisticsService>()
+                .SingleInstance();
+
+            builder.RegisterType<PaymentProviderDetailsService>()
+                .As<IPaymentProviderDetailsService>()
                 .SingleInstance();
 
             var apiKeysPairs = Environment.GetEnvironmentVariable("CPApiKeysPairs");

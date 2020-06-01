@@ -9,14 +9,14 @@
     <ProjectReference Include="..\MAVN.Service.CustomerProfile.Domain\MAVN.Service.CustomerProfile.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Falcon.Common" Version="0.2.2" />
-    <PackageReference Include="Falcon.Service.CustomerManagement.Contract" Version="6.0.0" />
-    <PackageReference Include="Falcon.Service.Dictionaries.Client" Version="1.3.0" />
-    <PackageReference Include="Falcon.Service.PrivateBlockchainFacade.Contract" Version="2.13.0" />
-    <PackageReference Include="Falcon.Service.Tiers.Contract" Version="1.0.0" />
-    <PackageReference Include="Lykke.Common.MsSql" Version="2.3.0" />
     <PackageReference Include="Lykke.RabbitMqBroker" Version="7.13.1" />
     <PackageReference Include="Lykke.Sdk" Version="5.17.0" />
+    <PackageReference Include="MAVN.Common" Version="1.0.0" />
+    <PackageReference Include="MAVN.Common.MsSql" Version="3.0.0" />
     <PackageReference Include="MAVN.Service.AdminManagement.Contract" Version="1.1.1" />
+    <PackageReference Include="MAVN.Service.CustomerManagement.Contract" Version="1.1.0" />
+    <PackageReference Include="MAVN.Service.Dictionaries.Client" Version="1.0.1" />
+    <PackageReference Include="MAVN.Service.PrivateBlockchainFacade.Contract" Version="1.1.0" />
+    <PackageReference Include="MAVN.Service.Tiers.Contract" Version="1.0.1" />
   </ItemGroup>
 </Project>

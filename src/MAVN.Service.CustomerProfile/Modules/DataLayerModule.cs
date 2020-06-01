@@ -1,6 +1,6 @@
-﻿using Autofac;
+using Autofac;
 using JetBrains.Annotations;
-using Lykke.Common.MsSql;
+using MAVN.Common.MsSql;
 using MAVN.Service.CustomerProfile.Domain.Repositories;
 using MAVN.Service.CustomerProfile.MsSqlRepositories;
 using MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories;
@@ -50,6 +50,10 @@ namespace MAVN.Service.CustomerProfile.Modules
 
             builder.RegisterType<ReferralFriendProfileRepository>()
                 .As<IReferralFriendProfileRepository>()
+                .SingleInstance();
+
+            builder.RegisterType<PaymentProviderDetailsRepository>()
+                .As<IPaymentProviderDetailsRepository>()
                 .SingleInstance();
         }
     }

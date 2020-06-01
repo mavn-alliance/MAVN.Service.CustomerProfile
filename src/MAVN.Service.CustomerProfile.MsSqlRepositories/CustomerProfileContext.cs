@@ -1,6 +1,6 @@
-﻿using System.Data.Common;
+using System.Data.Common;
 using JetBrains.Annotations;
-using Lykke.Common.MsSql;
+using MAVN.Common.MsSql;
 using MAVN.Service.CustomerProfile.Domain.Enums;
 using MAVN.Service.CustomerProfile.MsSqlRepositories.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +35,8 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
         internal DbSet<ReferralLeadProfileArchiveEntity> ReferralLeadProfilesArchive { get; set; }
 
         internal DbSet<ReferralFriendProfileEntity> ReferralFriendProfiles { get; set; }
+
+        internal DbSet<PaymentProviderDetailsEntity> PaymentProviderDetails { get; set; }
 
         internal DbSet<ReferralFriendProfileArchiveEntity> ReferralFriendProfilesArchive { get; set; }
 
@@ -114,6 +116,13 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
 
             modelBuilder.Entity<ReferralLeadProfileEntity>()
                 .HasIndex(c => c.PhoneNumber);
+
+            // configuring payment_provider_details table
+            modelBuilder.Entity<PaymentProviderDetailsEntity>()
+                .HasIndex(c => c.PartnerId).IsUnique(false);
+
+            modelBuilder.Entity<PaymentProviderDetailsEntity>()
+                .HasIndex(c => new { c.PartnerId, c.PaymentIntegrationProvider }).IsUnique();
         }
     }
 }

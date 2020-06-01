@@ -1,9 +1,9 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Common.Log;
 using Lykke.Common.Log;
 using Lykke.RabbitMqBroker.Subscriber;
 using MAVN.Service.CustomerProfile.Domain.Services;
-using Lykke.Service.Tiers.Contract;
+using MAVN.Service.Tiers.Contract;
 
 namespace MAVN.Service.CustomerProfile.DomainServices.Subscribers
 {

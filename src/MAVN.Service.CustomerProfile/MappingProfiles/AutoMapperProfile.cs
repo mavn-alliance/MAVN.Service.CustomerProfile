@@ -4,6 +4,7 @@ using MAVN.Service.CustomerProfile.Client.Models.Requests;
 using MAVN.Service.CustomerProfile.Client.Models.Responses;
 using MAVN.Service.CustomerProfile.Domain.Enums;
 using MAVN.Service.CustomerProfile.Domain.Models;
+using MAVN.Service.CustomerProfile.MsSqlRepositories.Entities;
 
 namespace MAVN.Service.CustomerProfile.MappingProfiles
 {
@@ -11,6 +12,11 @@ namespace MAVN.Service.CustomerProfile.MappingProfiles
     {
         public AutoMapperProfile()
         {
+            // entity and domain model
+            CreateMap<AdminProfileEntity, Domain.Models.AdminProfile>();
+            CreateMap<Domain.Models.AdminProfile, AdminProfileEntity>()
+                .ForMember(dest => dest.WasEmailEverVerified, src => src.Ignore());
+            // domain model and client model
             CreateMap<Domain.Models.AdminProfile, Client.Models.Responses.AdminProfile>(MemberList.Source);
             CreateMap<Client.Models.Responses.AdminProfile, Domain.Models.AdminProfile>(MemberList.Destination);
             CreateMap<AdminProfileRequest, Domain.Models.AdminProfile>()
@@ -59,6 +65,11 @@ namespace MAVN.Service.CustomerProfile.MappingProfiles
             CreateMap<PaginatedPartnerContactsModel, PaginatedPartnerContactsResponse>();
 
             CreateMap<PartnerContactRequestModel, PartnerContactModel>();
+
+            CreateMap<CreatePaymentProviderDetailsRequest, IPaymentProviderDetails>()
+                .ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<EditPaymentProviderDetailsRequest, IPaymentProviderDetails>();
+            CreateMap<IPaymentProviderDetails, PaymentProviderDetails>();
         }
     }
 }

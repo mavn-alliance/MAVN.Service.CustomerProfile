@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Falcon.Common.Encryption;
+using MAVN.Common.Encryption;
 using MAVN.Service.CustomerProfile.Domain.Models;
 
 namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
@@ -57,22 +57,6 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
         [Column("job_title")]
         [EncryptedProperty]
         public string JobTitle { get; set; }
-
-        internal static AdminProfileEntity Create(AdminProfile adminProfile)
-        {
-            return new AdminProfileEntity
-            {
-                AdminId = adminProfile.AdminId,
-                FirstName = adminProfile.FirstName,
-                LastName = adminProfile.LastName,
-                Email = adminProfile.Email,
-                IsEmailVerified = adminProfile.IsEmailVerified,
-                PhoneNumber = adminProfile.PhoneNumber,
-                Company = adminProfile.Company,
-                Department = adminProfile.Department,
-                JobTitle = adminProfile.JobTitle
-            };
-        }
 
         internal void Update(AdminProfile adminProfile)
         {
