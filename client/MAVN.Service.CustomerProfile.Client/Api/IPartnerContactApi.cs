@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using JetBrains.Annotations;
 using MAVN.Service.CustomerProfile.Client.Models;
 using MAVN.Service.CustomerProfile.Client.Models.Enums;
@@ -41,20 +41,14 @@ namespace MAVN.Service.CustomerProfile.Client.Api
         /// <param name="partnerContactRequest">The data with which the Partner contact needs to be created</param>
         /// <returns></returns>
         [Post("/api/partnerContacts")]
-        Task<PartnerContactErrorCodes> CreateIfNotExistAsync([Body] PartnerContactRequestModel partnerContactRequest);
+        Task CreateOrUpdateAsync([Body] PartnerContactRequestModel partnerContactRequest);
 
-        /// <summary>
-        /// Updates Partner contact.
-        /// </summary>
-        /// <param name="partnerContactUpdate">The Partner contact data.</param>
-        [Put("/api/partnerContacts")]
-        Task<PartnerContactErrorCodes> UpdateAsync([Body] PartnerContactUpdateRequestModel partnerContactUpdate);
 
         /// <summary>
         /// Deletes/Archives a specific Partner contact
         /// </summary>
         /// <param name="locationId">The Location Id</param>
         [Delete("/api/partnerContacts/{locationId}")]
-        Task DeleteAsync(string locationId);
+        Task DeleteIfExistAsync(string locationId);
     }
 }

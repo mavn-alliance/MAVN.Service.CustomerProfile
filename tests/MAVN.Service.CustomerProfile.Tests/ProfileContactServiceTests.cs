@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,59 +15,6 @@ namespace MAVN.Service.CustomerProfile.Tests
 {
     public class ProfileContactServiceTests
     {
-        [Fact]
-        public async Task TryingToCreateProfileContact_EverythingValid_SuccessfullyCreated()
-        {
-            var partnerContactRepository = new Mock<IPartnerContactRepository>();
-            var partnerContactResult = PartnerContactErrorCodes.None;
-            partnerContactRepository
-                .Setup(x => x.CreateIfNotExistAsync(It.IsAny<PartnerContactModel>()))
-                .ReturnsAsync(partnerContactResult)
-                .Verifiable();
-
-            PartnerContactService partnerContactService;
-
-            using (var logFactory = LogFactory.Create().AddUnbufferedConsole())
-            {
-                partnerContactService = new PartnerContactService(
-                    partnerContactRepository.Object,
-                    logFactory);
-            }
-
-            var actual = await partnerContactService.CreateIfNotExistsAsync(new PartnerContactModel
-            {
-
-            });
-
-            Assert.Equal(partnerContactResult, actual);
-        }
-
-        [Fact]
-        public async Task TryingToCreateProfileContact_ProfileContactAlreadyExists_ErrorCodeIsReturned()
-        {
-            var partnerContactRepository = new Mock<IPartnerContactRepository>();
-            var partnerContactResult = PartnerContactErrorCodes.PartnerContactAlreadyExists;
-
-            partnerContactRepository
-                .Setup(x => x.CreateIfNotExistAsync(It.IsAny<PartnerContactModel>()))
-                .ReturnsAsync(partnerContactResult);
-
-            PartnerContactService partnerContactService;
-
-            using (var logFactory = LogFactory.Create().AddUnbufferedConsole())
-            {
-                partnerContactService = new PartnerContactService(
-                    partnerContactRepository.Object,
-                    logFactory);
-            }
-
-            var actual = await partnerContactService.CreateIfNotExistsAsync(new PartnerContactModel
-            {
-            });
-
-            Assert.Equal(partnerContactResult, actual);
-        }
-
         [Fact]
         public async Task TryingToGetProfileContactByLocationId_ValidLocationId_SuccessfullyReturned()
         {
@@ -121,8 +68,7 @@ namespace MAVN.Service.CustomerProfile.Tests
         {
             var partnerContactRepository = new Mock<IPartnerContactRepository>();
             partnerContactRepository
-                .Setup(x => x.DeleteAsync(It.IsAny<string>()))
-                .ReturnsAsync(true)
+                .Setup(x => x.DeleteIfExistsAsync(It.IsAny<string>()))
                 .Verifiable();
 
             PartnerContactService partnerContactService;
@@ -134,7 +80,7 @@ namespace MAVN.Service.CustomerProfile.Tests
                     logFactory);
             }
 
-            await partnerContactService.RemoveAsync("testContactId");
+            await partnerContactService.RemoveIfExistsAsync("testContactId");
 
             partnerContactRepository.Verify();
         }

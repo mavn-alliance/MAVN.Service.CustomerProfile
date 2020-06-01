@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -104,7 +104,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
             }
         }
 
-        public async Task<bool> DeleteAsync(string locationId)
+        public async Task DeleteIfExistsAsync(string locationId)
         {
             using (var context = _contextFactory.CreateDataContext())
             {
@@ -116,7 +116,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
                             .FirstOrDefaultAsync(c => c.LocationId == locationId);
 
                         if (entity == null)
-                            return false;
+                            return;
 
                         var archiveEntity = PartnerContactArchiveEntity.Create(entity);
 
@@ -131,12 +131,9 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
                     catch (Exception e)
                     {
                         _log.Error(e, "Error occured while deleting partner contact ", $"locationId = {locationId}");
-                        return false;
                     }
                 }
             }
-
-            return true;
         }
 
         public async Task<IEnumerable<IPartnerContact>> GetPaginatedAsync(int skip, int take)
@@ -162,7 +159,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
             }
         }
 
-        public async Task<PartnerContactErrorCodes> CreateIfNotExistAsync(PartnerContactModel partnerContact)
+        public async Task CreateOrUpdateAsync(PartnerContactModel partnerContact)
         {
             using (var context = _contextFactory.CreateDataContext())
             {
@@ -171,44 +168,27 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
 
                 if (existentPartnerContact != null)
                 {
-                    return PartnerContactErrorCodes.PartnerContactAlreadyExists;
+                    existentPartnerContact = _encryptionService.Decrypt(existentPartnerContact);
+
+                    existentPartnerContact.FirstName = partnerContact.FirstName;
+                    existentPartnerContact.LastName = partnerContact.LastName;
+                    existentPartnerContact.PhoneNumber = partnerContact.PhoneNumber;
+                    existentPartnerContact.Email = partnerContact.Email;
+
+                    existentPartnerContact = _encryptionService.Encrypt(existentPartnerContact);
+
+                    context.PartnerContacts.Update(existentPartnerContact);
+                }
+                else
+                {
+                    var entity = PartnerContactEntity.Create(partnerContact);
+
+                    entity = _encryptionService.Encrypt(entity);
+
+                    context.PartnerContacts.Add(entity);
                 }
 
-                var entity = PartnerContactEntity.Create(partnerContact);
-
-                entity = _encryptionService.Encrypt(entity);
-
-                context.PartnerContacts.Add(entity);
-
                 await context.SaveChangesAsync();
-
-                return PartnerContactErrorCodes.None;
-            }
-        }
-
-        public async Task<PartnerContactErrorCodes> UpdateAsync(string locationId, string firstName, string lastName, string phoneNumber, string email)
-        {
-            using (var context = _contextFactory.CreateDataContext())
-            {
-                var entity = await context.PartnerContacts.FirstOrDefaultAsync(o => o.LocationId == locationId);
-
-                if (entity == null)
-                    return PartnerContactErrorCodes.PartnerContactDoesNotExist;
-
-                entity = _encryptionService.Decrypt(entity);
-
-                entity.FirstName = firstName;
-                entity.LastName = lastName;
-                entity.PhoneNumber = phoneNumber;
-                entity.Email = email;
-
-                entity = _encryptionService.Encrypt(entity);
-
-                context.PartnerContacts.Update(entity);
-
-                await context.SaveChangesAsync();
-
-                return PartnerContactErrorCodes.None;
             }
         }
 

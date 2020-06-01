@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Common.Log;
 using Lykke.Common.Log;
@@ -63,46 +63,16 @@ namespace MAVN.Service.CustomerProfile.DomainServices
             };
         }
 
-        public async Task<PartnerContactErrorCodes> CreateIfNotExistsAsync(PartnerContactModel partnerContact)
+        public async Task CreateOrUpdateAsync(PartnerContactModel partnerContact)
         {
-            var creationResult = await _partnerContactRepository.CreateIfNotExistAsync(partnerContact);
+            await _partnerContactRepository.CreateOrUpdateAsync(partnerContact);
 
-            if (creationResult == PartnerContactErrorCodes.PartnerContactAlreadyExists)
-            { 
-                _log.Warning("Partner Contact already exists", context: partnerContact.LocationId);
-                return creationResult;
-            }
-
-            _log.Info("Partner Contact is created", context: partnerContact.LocationId);
-
-            return creationResult;
+            _log.Info("Partner Contact is created or updated", context: partnerContact.LocationId);
         }
 
-        public async Task<PartnerContactErrorCodes> UpdateAsync(string locationId, string firstName, string lastName, string phoneNumber,
-            string email)
+        public Task RemoveIfExistsAsync(string locationId)
         {
-            var result = await _partnerContactRepository.UpdateAsync(locationId, firstName, lastName, phoneNumber, email);
-
-            if (result == PartnerContactErrorCodes.PartnerContactDoesNotExist)
-            {
-                _log.Warning("Partner Contact was not updated", context: locationId);
-            }
-
-            return result;
-        }
-
-        public async Task RemoveAsync(string locationId)
-        {
-            var deleted = await _partnerContactRepository.DeleteAsync(locationId);
-
-            if (deleted)
-            {
-                _log.Info("Partner Contact was removed", context: locationId);
-            }
-            else
-            {
-                _log.Warning("Partner Contact was not removed", context: locationId);
-            }
+            return _partnerContactRepository.DeleteIfExistsAsync(locationId);
         }
     }
 }

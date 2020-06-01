@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net;
@@ -87,33 +87,10 @@ namespace MAVN.Service.CustomerProfile.Controllers
         /// </summary>
         /// <returns><see cref="PartnerContactErrorCodes"/></returns>
         [HttpPost]
-        [ProducesResponseType(typeof(PartnerContactErrorCodes), (int)HttpStatusCode.OK)]
-        public async Task<PartnerContactErrorCodes> CreateIfNotExistAsync([FromBody]PartnerContactRequestModel partnerContactRequest)
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        public async Task CreateOrUpdateAsync([FromBody]PartnerContactRequestModel partnerContactRequest)
         {
-           var result = await _partnerContactService.CreateIfNotExistsAsync(_mapper.Map<PartnerContactModel>(partnerContactRequest));
-
-           return _mapper.Map<PartnerContactErrorCodes>(result);
-        }
-
-        /// <summary>
-        /// Updates Partner contact profile.
-        /// </summary>
-        /// <remarks>
-        ///
-        /// Error codes:
-        /// - **PartnerContactDoesNotExist**
-        /// </remarks>
-        /// <returns>
-        /// 200 - Partner contact profile successfully updated.
-        /// 400 - if an invalid input data was provided
-        /// </returns>
-        [HttpPut]
-        [ProducesResponseType(typeof(PartnerContactErrorCodes), (int)HttpStatusCode.OK)]
-        public async Task<PartnerContactErrorCodes> UpdateAsync([FromBody] PartnerContactUpdateRequestModel model)
-        {
-            var result = await _partnerContactService.UpdateAsync(model.LocationId, model.FirstName, model.LastName,
-                model.PhoneNumber, model.Email);
-            return _mapper.Map<PartnerContactErrorCodes>(result);
+           await _partnerContactService.CreateOrUpdateAsync(_mapper.Map<PartnerContactModel>(partnerContactRequest));
         }
 
         /// <summary>
@@ -122,12 +99,12 @@ namespace MAVN.Service.CustomerProfile.Controllers
         [HttpDelete("{locationId}")]
         [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorResponse), (int)HttpStatusCode.BadRequest)]
-        public Task DeleteAsync([Required][FromRoute] string locationId)
+        public Task DeleteIfExistAsync([Required][FromRoute] string locationId)
         {
             if (string.IsNullOrWhiteSpace(locationId))
                 throw new BadRequestException($"{nameof(locationId)} can't be empty");
 
-            return _partnerContactService.RemoveAsync(locationId);
+            return _partnerContactService.RemoveIfExistsAsync(locationId);
         }
 
         private string GetApiKeyName()
