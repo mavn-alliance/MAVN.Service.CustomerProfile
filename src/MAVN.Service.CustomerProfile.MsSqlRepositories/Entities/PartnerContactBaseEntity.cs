@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using MAVN.Common.Encryption;
 
@@ -12,7 +12,6 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Entities
         public string LocationId { get; set; }
 
         [Column("email")]
-        [Required]
         [EncryptedProperty]
         public string Email { get; set; }
 
