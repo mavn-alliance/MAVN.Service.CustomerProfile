@@ -1,4 +1,4 @@
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using JetBrains.Annotations;
 using MAVN.Service.CustomerProfile.Client.Models.Constants;
 
@@ -19,29 +19,25 @@ namespace MAVN.Service.CustomerProfile.Client.Models.Requests
         /// <summary>
         /// The Email of the Contact person
         /// </summary>
-        [Required, DataType(DataType.EmailAddress)]
-        [RegularExpression(ValidationConstants.EmailValidationPattern)]
+        [DataType(DataType.EmailAddress)]
         [MaxLength(100)]
         public string Email { get; set; }
 
         /// <summary>
         /// Contact First name
         /// </summary>
-        [Required]
         [MaxLength(100)]
         public string FirstName { get; set; }
 
         /// <summary>
         /// Contact Last name
         /// </summary>
-        [Required]
         [MaxLength(100)]
         public string LastName { get; set; }
 
         /// <summary>
         /// Contact Phone number
         /// </summary>
-        [Required]
         [MaxLength(50)]
         public string PhoneNumber { get; set; }
     }
