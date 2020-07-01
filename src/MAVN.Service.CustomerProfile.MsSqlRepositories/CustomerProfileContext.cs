@@ -1,6 +1,6 @@
-using System.Data.Common;
+﻿using System.Data.Common;
 using JetBrains.Annotations;
-using MAVN.Common.MsSql;
+using MAVN.Persistence.PostgreSQL.Legacy;
 using MAVN.Service.CustomerProfile.Domain.Enums;
 using MAVN.Service.CustomerProfile.MsSqlRepositories.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MAVN.Service.CustomerProfile.MsSqlRepositories
 {
-    public class CustomerProfileContext : MsSqlContext
+    public class CustomerProfileContext : PostgreSQLContext
     {
         private const string Schema = "customer_profile";
 
@@ -69,7 +69,7 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories
             _isPhoneVerificationDisabled = isPhoneVerificationDisabled;
         }
 
-        protected override void OnLykkeModelCreating(ModelBuilder modelBuilder)
+        protected override void OnMAVNModelCreating(ModelBuilder modelBuilder)
         {
             // configuring admin_profiles table
             modelBuilder.Entity<AdminProfileEntity>()

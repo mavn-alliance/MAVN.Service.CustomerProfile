@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Common.Log;
 using MAVN.Common.Encryption;
 using Lykke.Common.Log;
-using MAVN.Common.MsSql;
+using MAVN.Persistence.PostgreSQL.Legacy;
 using MAVN.Service.CustomerProfile.Domain.Enums;
 using MAVN.Service.CustomerProfile.Domain.Models;
 using MAVN.Service.CustomerProfile.Domain.Repositories;
@@ -17,12 +17,12 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
 {
     public class PartnerContactRepository : IPartnerContactRepository
     {
-        private readonly MsSqlContextFactory<CustomerProfileContext> _contextFactory;
+        private readonly PostgreSQLContextFactory<CustomerProfileContext> _contextFactory;
         private readonly IEncryptionService _encryptionService;
         private readonly ILog _log;
 
         public PartnerContactRepository(
-            MsSqlContextFactory<CustomerProfileContext> contextFactory,
+            PostgreSQLContextFactory<CustomerProfileContext> contextFactory,
             IEncryptionService encryptionService,
             ILogFactory logFactory)
         {

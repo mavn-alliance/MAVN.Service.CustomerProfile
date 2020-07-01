@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using MAVN.Common.Encryption;
-using MAVN.Common.MsSql;
+using MAVN.Persistence.PostgreSQL.Legacy;
 using MAVN.Service.CustomerProfile.Domain.Enums;
 using MAVN.Service.CustomerProfile.Domain.Models;
 using MAVN.Service.CustomerProfile.Domain.Repositories;
@@ -15,12 +15,12 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
 {
     public class AdminProfileRepository : IAdminProfileRepository
     {
-        private readonly MsSqlContextFactory<CustomerProfileContext> _contextFactory;
+        private readonly PostgreSQLContextFactory<CustomerProfileContext> _contextFactory;
         private readonly IMapper _mapper;
         private readonly IEncryptionService _encryptionService;
 
         public AdminProfileRepository(
-            MsSqlContextFactory<CustomerProfileContext> contextFactory,
+            PostgreSQLContextFactory<CustomerProfileContext> contextFactory,
             IMapper mapper,
             IEncryptionService encryptionService)
         {

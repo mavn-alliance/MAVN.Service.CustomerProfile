@@ -1,9 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MAVN.Common.Encryption;
-using MAVN.Common.MsSql;
+using MAVN.Persistence.PostgreSQL.Legacy;
 using MAVN.Service.CustomerProfile.Domain.Models;
 using MAVN.Service.CustomerProfile.Domain.Repositories;
 using MAVN.Service.CustomerProfile.MsSqlRepositories.Entities;
@@ -13,10 +13,10 @@ namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
 {
     public class PaymentProviderDetailsRepository : IPaymentProviderDetailsRepository
     {
-        private readonly MsSqlContextFactory<CustomerProfileContext> _contextFactory;
+        private readonly PostgreSQLContextFactory<CustomerProfileContext> _contextFactory;
         private readonly IEncryptionService _encryptionService;
 
-        public PaymentProviderDetailsRepository(MsSqlContextFactory<CustomerProfileContext> contextFactory, IEncryptionService encryptionService)
+        public PaymentProviderDetailsRepository(PostgreSQLContextFactory<CustomerProfileContext> contextFactory, IEncryptionService encryptionService)
         {
             _contextFactory = contextFactory;
             _encryptionService = encryptionService;

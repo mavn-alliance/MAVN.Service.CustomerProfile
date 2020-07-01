@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MAVN.Common.MsSql;
 using Lykke.Logs;
 using Lykke.RabbitMqBroker.Publisher;
+using MAVN.Persistence.PostgreSQL.Legacy;
 using MAVN.Service.CustomerProfile.Contract;
 using MAVN.Service.CustomerProfile.Domain.Enums;
 using MAVN.Service.CustomerProfile.Domain.Models;

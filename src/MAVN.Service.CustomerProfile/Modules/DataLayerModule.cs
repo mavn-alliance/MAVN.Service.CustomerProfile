@@ -1,11 +1,11 @@
-using Autofac;
+﻿using Autofac;
 using JetBrains.Annotations;
-using MAVN.Common.MsSql;
 using MAVN.Service.CustomerProfile.Domain.Repositories;
 using MAVN.Service.CustomerProfile.MsSqlRepositories;
 using MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories;
 using MAVN.Service.CustomerProfile.Settings;
 using Lykke.SettingsReader;
+using MAVN.Persistence.PostgreSQL.Legacy;
 
 namespace MAVN.Service.CustomerProfile.Modules
 {
@@ -23,7 +23,7 @@ namespace MAVN.Service.CustomerProfile.Modules
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterMsSql(
+            builder.RegisterPostgreSQL(
                 _connectionString,
                 connString => new CustomerProfileContext(connString, false, isPhoneVerificationDisabled: _isPhoneVerificationDisabled),
                 dbConn => new CustomerProfileContext(dbConn, isPhoneVerificationDisabled: _isPhoneVerificationDisabled));
