@@ -1,5 +1,4 @@
-using MAVN.Common.MsSql;
-using MAVN.Service.CustomerProfile.Domain.Enums;
+﻿using MAVN.Service.CustomerProfile.Domain.Enums;
 using MAVN.Service.CustomerProfile.Domain.Models;
 using MAVN.Service.CustomerProfile.Domain.Repositories;
 using MAVN.Service.CustomerProfile.MsSqlRepositories.Entities;
@@ -9,16 +8,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MAVN.Common.Encryption;
+using MAVN.Persistence.PostgreSQL.Legacy;
 
 namespace MAVN.Service.CustomerProfile.MsSqlRepositories.Repositories
 {
     public class ReferralFriendProfileRepository : IReferralFriendProfileRepository
     {
-        private readonly MsSqlContextFactory<CustomerProfileContext> _contextFactory;
+        private readonly PostgreSQLContextFactory<CustomerProfileContext> _contextFactory;
         private readonly IEncryptionService _encryptionService;
 
         public ReferralFriendProfileRepository(
-            MsSqlContextFactory<CustomerProfileContext> contextFactory,
+            PostgreSQLContextFactory<CustomerProfileContext> contextFactory,
             IEncryptionService encryptionService)
         {
             _contextFactory = contextFactory;

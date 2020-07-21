@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <Version>1.0.0</Version>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
@@ -9,14 +9,13 @@
     <ProjectReference Include="..\MAVN.Service.CustomerProfile.Domain\MAVN.Service.CustomerProfile.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Lykke.RabbitMqBroker" Version="7.13.1" />
-    <PackageReference Include="Lykke.Sdk" Version="5.17.0" />
+    <PackageReference Include="Lykke.RabbitMqBroker" Version="7.13.3" />
+    <PackageReference Include="Lykke.Sdk" Version="5.18.0" />
     <PackageReference Include="MAVN.Common" Version="1.0.0" />
-    <PackageReference Include="MAVN.Common.MsSql" Version="3.0.0" />
-    <PackageReference Include="MAVN.Service.AdminManagement.Contract" Version="1.1.1" />
+    <PackageReference Include="MAVN.Service.AdminManagement.Contract" Version="1.4.1" />
     <PackageReference Include="MAVN.Service.CustomerManagement.Contract" Version="1.1.0" />
-    <PackageReference Include="MAVN.Service.Dictionaries.Client" Version="1.0.1" />
+    <PackageReference Include="MAVN.Service.Dictionaries.Client" Version="1.1.0" />
     <PackageReference Include="MAVN.Service.PrivateBlockchainFacade.Contract" Version="1.1.0" />
-    <PackageReference Include="MAVN.Service.Tiers.Contract" Version="1.0.1" />
+    <PackageReference Include="MAVN.Service.Tiers.Contract" Version="1.1.1" />
   </ItemGroup>
 </Project>
